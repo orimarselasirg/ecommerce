@@ -9,6 +9,10 @@ const user = new Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
   role: {
     type: String,
     required: true,
@@ -18,8 +22,8 @@ const user = new Schema({
     unique: true,
     required: true,
   },
-  password: {
-    type: String,
+  status: {
+    type: Boolean,
     required: true,
   },
 });

@@ -37,9 +37,27 @@ const getCartById = async (userId, cartId) => {
   }
 };
 
+const getCartByUsers = async (userId) => {
+  const carts = await Cart.find({ userId: userId });
+  try {
+    if (carts) {
+      return {
+        status: SUCCESS.SUCCESS,
+        data: carts,
+      };
+    }
+  } catch (error) {
+    errorResponse(
+      SUCCESS.NOT_SUCCESS,
+      "service",
+      "Listado de pedidos no encontrados"
+    );
+  }
+};
+
 const createCart = async (userId, cart) => {
-  // const userFound = await User.findOne({ _id: userId });
-  // console.log(userFound);
+  const userFound = await User.findOne({ identification: userId });
+  console.log(userFound);
   const newCart = await Cart.create({
     products: [...cart.products],
     userId: userId,
@@ -83,4 +101,5 @@ module.exports = {
   getCartById,
   createCart,
   deleteCart,
+  getCartByUsers,
 };

@@ -3,6 +3,7 @@ const {
   getCartById,
   createCart,
   deleteCart,
+  getCartByUsers,
 } = require("../services/cart.service");
 
 const { controllerResponse } = require("../util/response");
@@ -23,6 +24,16 @@ const getCartByIdController = async (req, res) => {
     res
       .status(200)
       .json(await getCartById(req.params.userId, req.params.cartId));
+  } catch (error) {
+    res
+      .status(ERROR.BAD_REQUEST)
+      .send(controllerResponse(error.name, "controller", error.message));
+  }
+};
+
+const getCartByUsersController = async (req, res) => {
+  try {
+    res.status(200).json(await getCartByUsers(req.params.userId));
   } catch (error) {
     res
       .status(ERROR.BAD_REQUEST)
@@ -55,4 +66,5 @@ module.exports = {
   getCartByIdController,
   createCartController,
   deleteCartController,
+  getCartByUsersController,
 };
