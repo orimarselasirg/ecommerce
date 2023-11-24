@@ -5,6 +5,7 @@ const {
   createProduct,
   modifyProduct,
   deleteProduct,
+  saveProductImage,
 } = require("../services/products.service");
 
 const getProductsController = async (req, res) => {
@@ -43,6 +44,23 @@ const getProductByIdController = async (req, res) => {
 const createProductController = async (req, res) => {
   try {
     res.status(200).json(await createProduct(req.body));
+  } catch (error) {
+    console.log({
+      name: error.name,
+      path: "controller",
+      message: error.message,
+    });
+    res.status(ERROR.BAD_REQUEST).json({
+      name: error.name,
+      message: error.message,
+    });
+  }
+};
+
+const saveProductImageController = async (req, res) => {
+  try {
+    const { tempFilePath } = req.files?.picture;
+    res.status(200).json(await saveProductImage(tempFilePath));
   } catch (error) {
     console.log({
       name: error.name,
@@ -96,4 +114,5 @@ module.exports = {
   createProductController,
   modifyProductController,
   deleteProductController,
+  saveProductImageController,
 };

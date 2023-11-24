@@ -17,6 +17,10 @@ const cart = new Schema({
     type: String,
     required: true,
   },
+  total: {
+    type: Number,
+    required: true,
+  },
   status: {
     type: Boolean,
     required: false,

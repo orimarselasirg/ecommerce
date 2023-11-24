@@ -63,6 +63,8 @@ const createCart = async (userId, cart) => {
     userId: userId,
     transaction: cart.transaction,
     isApproved: cart.isApproved,
+    total: cart.total,
+    status: true,
   });
   if (newCart) {
     return {

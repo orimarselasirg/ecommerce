@@ -1,5 +1,6 @@
 const Products = require("../models/Products");
 const { SUCCESS, ERROR, errorResponse } = require("../util/constans");
+const { uploadImageCloud } = require("../util/cloudinary");
 
 const getProducts = async () => {
   const productsFound = await Products.find();
@@ -31,6 +32,7 @@ const getProductById = async (productId) => {
 
 const createProduct = async (product) => {
   const newProduct = await Products.create(product);
+
   try {
     if (newProduct) {
       return {
@@ -45,6 +47,19 @@ const createProduct = async (product) => {
       "service",
       "Producto no pudo ser creado"
     );
+  }
+};
+
+const saveProductImage = async (tempFilePath) => {
+  try {
+    const secure_url = await uploadImageCloud(tempFilePath);
+    return {
+      status: SUCCESS.SUCCESS,
+      data: secure_url,
+    };
+  } catch (error) {
+    // errorResponse(SUCCESS.NOT_SUCCESS, "service", "Imagen no pudo ser creada");
+    console.log(error);
   }
 };
 
@@ -95,4 +110,5 @@ module.exports = {
   createProduct,
   modifyProduct,
   deleteProduct,
+  saveProductImage,
 };
