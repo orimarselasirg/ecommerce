@@ -6,11 +6,13 @@ const {
   createCartController,
   deleteCartController,
   getCartByUsersController,
+  modifyCartController,
 } = require("../controllers/cart.controller");
 
 router.get("/carts", getCartsController);
 router.get("/carts-by-user/:userId", getCartByUsersController);
 router.post("/carts/:userId", createCartController);
+router.put("/carts-by-id/:cartId", modifyCartController);
 router.get("/carts/:cartId", getCartByIdController);
 router.delete("/carts/:cartId", deleteCartController);
 

@@ -3,6 +3,7 @@ const Cart = require("../models/Cart");
 const User = require("../models/User");
 const { SUCCESS } = require("../util/constans");
 const { errorResponse } = require("../util/response");
+const { payment } = require("./payment.service");
 
 const getCarts = async (userId) => {
   // const carts = await Cart.findOne({ userId: userId });
@@ -58,6 +59,7 @@ const getCartByUsers = async (userId) => {
 const createCart = async (userId, cart) => {
   const userFound = await User.findOne({ identification: userId });
   console.log(userFound);
+
   const newCart = await Cart.create({
     products: [...cart.products],
     userId: userId,
@@ -75,6 +77,18 @@ const createCart = async (userId, cart) => {
   } else {
     errorResponse(SUCCESS.NOT_SUCCESS, "service", "Pedido no pudo ser creado");
   }
+};
+
+const modifyCart = async (_id, isApproved, transaction) => {
+  console.log(_id);
+  console.log(isApproved);
+  console.log(transaction);
+  await Cart.findOneAndUpdate(
+    { _id: _id },
+    { isApproved: isApproved, transaction: transaction }
+  );
+  const cartFoundModified = await Cart.findOne({ _id: _id });
+  return cartFoundModified;
 };
 
 const deleteCart = async (cartId) => {
@@ -104,4 +118,5 @@ module.exports = {
   createCart,
   deleteCart,
   getCartByUsers,
+  modifyCart,
 };

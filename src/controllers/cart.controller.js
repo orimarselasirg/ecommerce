@@ -4,6 +4,7 @@ const {
   createCart,
   deleteCart,
   getCartByUsers,
+  modifyCart,
 } = require("../services/cart.service");
 
 const { controllerResponse } = require("../util/response");
@@ -51,6 +52,26 @@ const createCartController = async (req, res) => {
   }
 };
 
+const modifyCartController = async (req, res) => {
+  console.log(req.body);
+  console.log(req.params);
+  try {
+    res
+      .status(200)
+      .json(
+        await modifyCart(
+          req.params.cartId,
+          req.body.isApproved,
+          req.body.transaction
+        )
+      );
+  } catch (error) {
+    res
+      .status(ERROR.BAD_REQUEST)
+      .send(controllerResponse(error.name, "controller", error.message));
+  }
+};
+
 const deleteCartController = async (req, res) => {
   try {
     res.status(200).json(await deleteCart(req.params.cartId));
@@ -67,4 +88,5 @@ module.exports = {
   createCartController,
   deleteCartController,
   getCartByUsersController,
+  modifyCartController,
 };
