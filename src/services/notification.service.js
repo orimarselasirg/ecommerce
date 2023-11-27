@@ -10,11 +10,10 @@ const notification = async (
 ) => {
   try {
     const infoNotification = await transporter.sendMail({
-      from: '"Byte4bit Ecommerce" <ramirogrisales@gmail.com>', // sender address
-      to: email, // list of receivers
-      subject: "Notificación de compra ✔", // Subject line
-      // text: "Hello world?", // plain text body
-      html: mailTemplate(username, status, transaction, total), // html body
+      from: '"Byte4bit Ecommerce" <ramirogrisales@gmail.com>',
+      to: email,
+      subject: "Notificación de compra ✔",
+      html: mailTemplate(username, status, transaction, total),
     });
     return infoNotification;
   } catch (error) {

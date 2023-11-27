@@ -53,8 +53,6 @@ const createCartController = async (req, res) => {
 };
 
 const modifyCartController = async (req, res) => {
-  console.log(req.body);
-  console.log(req.params);
   try {
     res
       .status(200)

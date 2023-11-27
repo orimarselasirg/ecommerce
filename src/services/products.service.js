@@ -1,5 +1,5 @@
 const Products = require("../models/Products");
-const { SUCCESS, ERROR, errorResponse } = require("../util/constans");
+const { SUCCESS, errorResponse } = require("../util/constans");
 const { uploadImageCloud } = require("../util/cloudinary");
 
 const getProducts = async () => {
@@ -58,8 +58,11 @@ const saveProductImage = async (tempFilePath) => {
       data: secure_url,
     };
   } catch (error) {
-    // errorResponse(SUCCESS.NOT_SUCCESS, "service", "Imagen no pudo ser creada");
     console.log(error);
+    throw new Error({
+      status: error.status,
+      message: error.message,
+    });
   }
 };
 

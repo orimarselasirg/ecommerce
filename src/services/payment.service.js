@@ -1,43 +1,13 @@
 const mercadopago = require("mercadopago");
+require("dotenv").config();
 
 mercadopago.configure({
-  access_token:
-    "APP_USR-959457018190036-112414-29acc897c6357c03bdf4b2d1ec6422e3-1564535318",
+  access_token: process.env.ACCESS_TOKEN_MERCADOPAGO,
 });
 
 const payment = async (items, payer) => {
   let preference = {
-    // items: [
-    //   {
-    //     id: "item-ID-1234",
-    //     title: "Meu produto",
-    //     currency_id: "USD",
-    //     picture_url: "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
-    //     description: "Descrição do Item",
-    //     category_id: "art",
-    //     quantity: 1,
-    //     unit_price: 100,
-    //   },
-    // ],
     items: items,
-    // payer: {
-    //   name: "João",
-    //   surname: "Silva",
-    //   email: "user@email.com",
-    //   phone: {
-    //     area_code: "11",
-    //     number: 44444444,
-    //   },
-    //   identification: {
-    //     type: "CPF",
-    //     number: "19119119100",
-    //   },
-    //   address: {
-    //     street_name: "Street",
-    //     street_number: 123,
-    //     zip_code: "06233200",
-    //   },
-    // },
     payer: payer,
     back_urls: {
       success: "http://localhost:3000/home/cart",
@@ -59,7 +29,6 @@ const payment = async (items, payer) => {
   };
   try {
     const preferences = await mercadopago.preferences.create(preference);
-    console.log(preferences.response.id);
     return preferences.response;
   } catch (error) {
     console.log(error);

@@ -1,4 +1,3 @@
-const Product = require("../models/Products");
 const Cart = require("../models/Cart");
 const User = require("../models/User");
 const { SUCCESS } = require("../util/constans");
@@ -78,9 +77,6 @@ const createCart = async (userId, cart) => {
 };
 
 const modifyCart = async (_id, isApproved, transaction) => {
-  console.log(_id);
-  console.log(isApproved);
-  console.log(transaction);
   await Cart.findOneAndUpdate(
     { _id: _id },
     { isApproved: isApproved, transaction: transaction }
