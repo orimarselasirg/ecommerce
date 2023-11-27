@@ -279,6 +279,63 @@ Despues, podras escribir los siguientes endpoints.
   /notification
   ```
 
+## GENERACION DE IMAGENES DOCKER Y EJECUCION
+
+el proyecto tiene configurado el Dockerfile para generacion de la imagen y levantamiento del mismo
+
+## Instalar docker
+
+Debe tener instalado Docker, en caso dado que no, lo puede descargar en la pagina oficial. [Docker](https://docs.docker.com/desktop/install/windows-install/)
+
+una vez instalado, debe crear una cuenta con un nombre de usuairo
+
+## Ejecutar el build del docker
+
+Abra una terminal y situese en la raiz del proyecto y ejecute el siguiente codigo para crear la imagen del proyecto: ``docker build -t [nombredelaimagen] .``
+
+donde ``[nombredelaimagen]`` es el nombre que desea colocarle a la imagen
+
+por convencion se recomienda ``nombreusuariodocker/nombredelproyecto``
+
+por ejemplo:
+
+```
+docker build -t developer/apiecommerce .
+```
+
+Importante, debe tener corriendo la aplicacion de Docker para que el comando no le genere errores
+
+## Levantar la creación de la imagen
+
+una vez generada la imagen, se debe ejecutar en la misma terminal y misma ubicacion el siguiente comando:
+
+```
+docker run -d -p 8080:8080 developer/ecommerce
+```
+este comando le generara una llave SHA que automaticamente levantara la imagen para su ejecucion
+
+<img width="1244" alt="image" src="https://github.com/orimarselasirg/ecommerce-front/assets/84402210/b82465d2-4972-413f-a88a-c0ef1b11b304">
+
+para poder usar la aplicacion back, debe dirigirse a las opciones de la imagen y ejecutar "open in terminal"
+
+<img width="1250" alt="image" src="https://github.com/orimarselasirg/ecommerce/assets/84402210/ffe7b48f-2511-4c60-901c-c705467730e7">
+
+y en esa pantalla puede irse a los "Logs" y vera en terminal la ejecucion del backend
+
+En este punto ya tiene la API REST corriendo desde el contenedor
+
+### En caso que no desee realizar el proceso de creacion de imagen, puede descargar la imagen y ejecutarla en su equipo, tener presente que si desea comprobar la funcionalidad del backend puede usar Postman o insomnia, o levantar el frontend
+### el frontend tambien tiene imagen docker y pueden descargalo con los siguientes comandos
+
+Imagen docker para frontend
+``` bash
+docker pull ramirogrisales/ecommerce
+```
+Imagen docker para backend
+```bash
+docker pull ramirogrisales/apiecommerce
+```
+
 ## Authors
 
 - [@orimarselasirg](https://github.com/orimarselasirg)
