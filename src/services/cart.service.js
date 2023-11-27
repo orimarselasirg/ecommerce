@@ -6,7 +6,6 @@ const { errorResponse } = require("../util/response");
 const { payment } = require("./payment.service");
 
 const getCarts = async (userId) => {
-  // const carts = await Cart.findOne({ userId: userId });
   const carts = await Cart.find();
   try {
     if (carts) {

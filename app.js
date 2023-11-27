@@ -9,6 +9,7 @@ const product = require("./src/routes/product.route");
 const cart = require("./src/routes/cart.route");
 const user = require("./src/routes/user.route");
 const payment = require("./src/routes/payment.route");
+const notification = require("./src/routes/notificator.route");
 
 app.use(express.json());
 app.use(cors());
@@ -25,5 +26,6 @@ app.use(`${API_VERSION}/`, product);
 app.use(`${API_VERSION}/`, cart);
 app.use(`${API_VERSION}/`, user);
 app.use(`${API_VERSION}/`, payment);
+app.use(`${API_VERSION}/`, notification);
 
 module.exports = { app };
