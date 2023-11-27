@@ -34,7 +34,7 @@ const getCartByIdController = async (req, res) => {
 
 const getCartByUsersController = async (req, res) => {
   try {
-    res.status(200).json(await getCartByUsers(req.params.userId));
+    res.status(200).json(await getCartByUsers(req.params.email));
   } catch (error) {
     res
       .status(ERROR.BAD_REQUEST)

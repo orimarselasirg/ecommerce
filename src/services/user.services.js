@@ -30,8 +30,29 @@ const getUserById = async (userId) => {
     errorResponse(SUCCESS.NOT_SUCCESS, "service", "Usuario no encontrado");
   }
 };
+const getUserByEmail = async (email) => {
+  console.log(email);
+  const userFound = await User.findOne({ email: email });
+  try {
+    if (userFound) {
+      return {
+        status: SUCCESS.SUCCESS,
+        data: userFound,
+      };
+    }
+  } catch (error) {
+    errorResponse(SUCCESS.NOT_SUCCESS, "service", "Usuario no encontrado");
+  }
+};
 
 const createUser = async (user) => {
+  const userFound = await User.findOne({ email: user.email });
+  if (userFound) {
+    return {
+      status: SUCCESS.NOT_SUCCESS,
+      message: "Usuario ya registrado",
+    };
+  }
   const newUser = await User.create(user);
   try {
     if (newUser) {
@@ -96,4 +117,5 @@ module.exports = {
   createUser,
   modifyUser,
   deleteUser,
+  getUserByEmail,
 };

@@ -1,7 +1,13 @@
 const { mailTemplate } = require("../util/mailTemplate");
 const { transporter } = require("../util/notification");
 
-const notification = async (email, username, transaction, total, status) => {
+const notification = async (
+  email,
+  username = "Cliente",
+  transaction,
+  total,
+  status
+) => {
   try {
     const infoNotification = await transporter.sendMail({
       from: '"Byte4bit Ecommerce" <ramirogrisales@gmail.com>', // sender address

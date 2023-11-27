@@ -37,8 +37,8 @@ const getCartById = async (userId, cartId) => {
   }
 };
 
-const getCartByUsers = async (userId) => {
-  const carts = await Cart.find({ userId: userId });
+const getCartByUsers = async (email) => {
+  const carts = await Cart.find({ userId: email });
   try {
     if (carts) {
       return {
@@ -57,7 +57,6 @@ const getCartByUsers = async (userId) => {
 
 const createCart = async (userId, cart) => {
   const userFound = await User.findOne({ identification: userId });
-  console.log(userFound);
 
   const newCart = await Cart.create({
     products: [...cart.products],

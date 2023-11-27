@@ -4,6 +4,7 @@ const {
   createUser,
   modifyUser,
   deleteUser,
+  getUserByEmail,
 } = require("../services/user.services");
 const { ERROR } = require("../util/constans");
 const { controllerResponse } = require("../util/response");
@@ -21,6 +22,16 @@ const getUserController = async (req, res) => {
 const getUserByIdController = async (req, res) => {
   try {
     res.status(200).json(await getUserById(req.params.id));
+  } catch (error) {
+    res
+      .status(ERROR.BAD_REQUEST)
+      .json(controllerResponse(error.name, "controller", error.message));
+  }
+};
+const getUserByEmailController = async (req, res) => {
+  console.log(req.params.email);
+  try {
+    res.status(200).json(await getUserByEmail(req.params.email));
   } catch (error) {
     res
       .status(ERROR.BAD_REQUEST)
@@ -64,4 +75,5 @@ module.exports = {
   createUserController,
   modifyUserController,
   deleteUserController,
+  getUserByEmailController,
 };
